@@ -6,5 +6,12 @@ As specified in the website, this dataset was built from the recordings of 30 su
 
 
 TRANSFORMATIONS DONE:
-1) Over "text\X_tests.txt"
-    - test_x<-read.table(".\\test\\X_test.txt",sep="") -> To ensure to have readable data
+1) Basic readable:
+    - test_x<-read.table(".\\test\\X_test.txt",sep="") -> To have the x-test data properly divided in variables
+    - test_y<-read.table(".\\test\\Y_test.txt",sep="") -> To have the x-test data properly readable
+2) Have an overview of the content:
+    ftable(subject_test)
+    ftable(test_y)
+    summary(test_x)    
+        when doing the summary(test_x) you realize that there is no variable that can be used as key with those 2 dataset 
+        (subject_test and test_y). Therefore we must assume that the key will be the implicit ID (the order starting from 1 to 2947)
