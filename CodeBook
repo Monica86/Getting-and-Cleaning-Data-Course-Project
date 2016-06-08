@@ -7,3 +7,4 @@ As specified in the website, this dataset was built from the recordings of 30 su
 
 TRANSFORMATIONS DONE:
 1) Over "text\X_tests.txt"
+    - test_x<-read.table(".\\test\\X_test.txt",sep="") -> To ensure to have readable data
