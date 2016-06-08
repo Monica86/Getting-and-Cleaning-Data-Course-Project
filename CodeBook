@@ -1,0 +1,9 @@
+ORIGINAL DATA
+The raw data used for this project is labeled as "Human Activity Recognition Using Smartphones Data Set" taken from the website  "http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones". 
+As specified in the website, this dataset was built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors. * For more info, please check the above mentioned website.
+    
+    VARIABLES FROM THE RAW DATA USED
+
+
+TRANSFORMATIONS DONE:
+1) Over "text\X_tests.txt"
