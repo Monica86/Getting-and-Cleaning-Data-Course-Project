@@ -1,6 +1,6 @@
 (To see the detail of every step in the code, please check "README")
 
-##ORIGINAL DATA
+ORIGINAL DATA
 
 The raw data used for this project is labeled as "Human Activity Recognition Using Smartphones Data Set" taken from the website  "http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones". 
 As specified in the website, this dataset was built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors. * For more info, please check the above mentioned website.
@@ -12,9 +12,9 @@ The names of each variable in X_train and X_test (meaning the Features info) is 
 The correspondence of the activities in number and the activity names is stored in the file "activity_labels".
 
 
-##TRANSFORMATIONS DONE:
+RANSFORMATIONS DONE:
 
-##1. Document "RUN_ANALYSIS 1-4.csv"
+1. Document "RUN_ANALYSIS 1-4.csv"
 
 MERGE -> As they all belong to the same data set, we can just join them directly -> x_test, y_test and subject_test can be merged by columns, and x_train, y_train and subject_train can do the same. 
 Then we could just add test and the train data by rows, to have the complete data set, with the same variables.
@@ -25,6 +25,6 @@ CLEAN DATA ->
 2. We have created a column to have a clear undestanding of the activity, without having to check the matching of each number
 3. We have enhanced the names of the column to ensure that it is readable by anyone not familiar with the dataset
 
-##2. Document "RUN ANALYSIS 5.csv"
+2. Document "RUN ANALYSIS 5.csv"
 
 We took the previous data set, already tidy, and created a summary, containing the average of each feature per subject and activity.
