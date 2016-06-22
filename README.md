@@ -1,6 +1,6 @@
 # Getting-and-Cleaning-Data-Course-Project
 
-This document explains what each script does, and the relationship between them.
+This document explains what each script does, and the relationship between them. Basically, it creates 2 documents in the working directory, one of them corresponding to the 1-4 requests in the assignment, and the other one corresponding to the last request (5)
 
 First of all, we need to download the package plyr, as some of these scripts are using the formulas in plyr.
 ###PACKAGES NEEDED
@@ -50,18 +50,19 @@ subject<-rbind(subject_test,subject_train)
 ###1.c.III - Rename columns
 names(subject)<-"Subject"
 
-###1.d - Join them all - Now that we have all the data separated in the 3 groups (Features, Subject and Activity), we merge the data. As the observations are the same, we just need to bind the columns one to another.
+###1.d - Join them all - Now that we have all the data separated in the 3 groups (Features, Subject and Activity), we merge the data. As the observations are the same, we just need to bind the columns one to another. Additionally, we create a document in the working directory, that will be "updated" with the next questions: "run_analysis1-4.csv". The reason I created only one document instead of 4 different ones for each bullet is that I understood that the instructions request only 2 documents: the whole tidy document, and the "summary".
 
 all_data<-cbind(subject,activities,features)
+write.csv(all_data,".\\run_analysis1-4.csv",row.names=FALSE)
 
-
-###2 - Select only mean and std of the measures -> Interpretation: Select only those features that contain mean() and std(). Using a simple grpl we select the columns which name contains either "mean" or "std". And finally we re-create the data set using only those columns from features.
+###2 - Select only mean and std of the measures -> Interpretation: Select only those features that contain mean() and std(). Using a simple grpl we select the columns which name contains either "mean" or "std". And finally we re-create the data set using only those columns from features, and we "update" the document already stored.
 
 meanstd<-grep(".*mean.*|.*std.*",features_names$V2)
 msdata<-features[,meanstd]
 all_data_mstd<-cbind(subject, activities, msdata)
+write.csv(all_data_mstd,".\\run_analysis1-4.csv",row.names=FALSE)
 
-###3 - Uses descriptive activity names to name the activities in the data set .> activities names instead of only numbers, using activity_labels vs. test_y/train_y. We read the activity_labels.txt that contain the matching between numbers and the activity itself, we change the name of the first column, so that the name is exactly the same name as the one stated in the "Activity" column from the activities dataset, and we merge the two data sets. The "join" function does the rest: it matches the "Activity" column in both datasets and then add the column "Activity_name" where it corresponds. Note: I preferred to keep the "Activity" column instead of just replacing it with the "Activity_names" column, as a kind of check. Finally, we re-create the data again using this new dataset including the names of the activities
+###3 - Uses descriptive activity names to name the activities in the data set .> activities names instead of only numbers, using activity_labels vs. test_y/train_y. We read the activity_labels.txt that contain the matching between numbers and the activity itself, we change the name of the first column, so that the name is exactly the same name as the one stated in the "Activity" column from the activities dataset, and we merge the two data sets. The "join" function does the rest: it matches the "Activity" column in both datasets and then add the column "Activity_name" where it corresponds. Note: I preferred to keep the "Activity" column instead of just replacing it with the "Activity_names" column, as a kind of check. Finally, we re-create the data again using this new dataset including the names of the activities and we "update" the document already stored.
 
 activities_names<- read.table(".\\UCI HAR Dataset\\activity_labels.txt",sep="")
 activities_names<-rename(activities_names,replace=c("V1"="Activity"))
@@ -70,10 +71,11 @@ activities_names<-rename(activities_names,replace=c("V2"="Activity_name"))
 activities_with_names<-join(activities,activities_names,by="Activity")
 
 all_data_mstd_act<-cbind(subject, activities_with_names, msdata)
+write.csv(all_data_mstd_act,".\\run_analysis1-4.csv",row.names=FALSE)
 
 ###4 - Appropriately labels the data set with descriptive variable names.
 ###4.a - Activities and Subjects are already descriptive - We already gave a proper and understandable name for the Activities and Subject datasets in the first part.
-###4.b - Label the features columns - We have tried to translate the letters that have no meaning when you don't know the data behind, to the complete word. As a result, the names of the columns are quite big, but at least they can be understood by anyone.
+###4.b - Label the features columns - We have tried to translate the letters that have no meaning when you don't know the data behind, to the complete word. As a result, the names of the columns are quite big, but at least they can be understood by anyone. Finally, we "update" the document already stored to have a final version.
 
 names(all_data_mstd_act)<-gsub("^t", "Time ",names(all_data_mstd_act))
 names(all_data_mstd_act)<-gsub("Acc", "Accelerometer ",names(all_data_mstd_act))
@@ -87,7 +89,11 @@ names(all_data_mstd_act)<-gsub("Gravity", "Gravity ",names(all_data_mstd_act))
 names(all_data_mstd_act)<-gsub("mean()", "Mean ",names(all_data_mstd_act))
 names(all_data_mstd_act)<-gsub("std()", "Standard Deviation ",names(all_data_mstd_act))
 
-###5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. - We make the selection using aggregate (the group_by-mutate or summarize were not easy in this case, as we have several columns to average)
+write.csv(all_data_mstd_act,".\\run_analysis1-4.csv",row.names=FALSE)
+
+###5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. - We make the selection using aggregate (the group_by-mutate or summarize were not easy in this case, as we have several columns to average) and we create another document where we will store the "summarized" data.
+
+###5.a - Grouping by Subject and Activity_name, get the average of all the Features
 summary_grouped<-aggregate(. ~Subject + Activity_name,all_data_mstd_act,mean)
-
-
+###5.b - Create the independent document
+write.csv(summary_grouped,".\\Summary_grouped.csv",row.names=FALSE)
