@@ -2,16 +2,26 @@ ORIGINAL DATA
 The raw data used for this project is labeled as "Human Activity Recognition Using Smartphones Data Set" taken from the website  "http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones". 
 As specified in the website, this dataset was built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors. * For more info, please check the above mentioned website.
     
-    VARIABLES FROM THE RAW DATA USED
+The data provided follows a symmetrical structure: For both data sets "Train" and "Test", we have data from Features, Activities and Subjects.
+Each subject (1-30) develops an activity (1-6) during a training or test session, resulting in some features that are being analyzed. 
+The subject info is stored in subject_train and subject_test. The activity info is stored in y_train and y_test, and the features info is stored in x_train and x_test. 
+The names of each variable in X_train and X_test (meaning the Features info) is stored in the file "feature", along with some explanations in "feature_info"
+The correspondence of the activities in number and the activity names is stored in the file "activity_labels".
 
 
 TRANSFORMATIONS DONE:
-1) Basic readable:
-    - test_x<-read.table(".\\test\\X_test.txt",sep="") -> To have the x-test data properly divided in variables
-    - test_y<-read.table(".\\test\\Y_test.txt",sep="") -> To have the x-test data properly readable
-2) Have an overview of the content:
-    ftable(subject_test)
-    ftable(test_y)
-    summary(test_x)    
-        when doing the summary(test_x) you realize that there is no variable that can be used as key with those 2 dataset 
-        (subject_test and test_y). Therefore we must assume that the key will be the implicit ID (the order starting from 1 to 2947)
+
+1. Document "RUN_ANALYSIS 1-4.csv"
+
+MERGE -> As they all belong to the same data set, we can just join them directly -> x_test, y_test and subject_test can be merged by columns, and x_train, y_train and subject_train can do the same. 
+Then we could just add test and the train data by rows, to have the complete data set, with the same variables.
+Nevertheless, in order to follow the instructions properly, we decided to complete the data sets of "subject", "activity" and "features" by merging test and train data first, and then to merge the columns of these three groups. The result is exactly the same.
+
+CLEAN DATA -> 
+1. We have labeled every variable included in the data set with the correct name of the variable
+2. We have created a column to have a clear undestanding of the activity, without having to check the matching of each number
+3. We have enhanced the names of the column to ensure that it is readable by anyone not familiar with the dataset
+
+2. Document "RUN ANALYSIS 5.csv"
+
+We took the previous data set, already tidy, and created a summary, containing the average of each feature per subject and activity.
