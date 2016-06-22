@@ -96,4 +96,4 @@ write.csv(all_data_mstd_act,".\\run_analysis1-4.csv",row.names=FALSE)
 ###5.a - Grouping by Subject and Activity_name, get the average of all the Features
 summary_grouped<-aggregate(. ~Subject + Activity_name,all_data_mstd_act,mean)
 ###5.b - Create the independent document
-write.csv(summary_grouped,".\\Summary_grouped.csv",row.names=FALSE)
+write.table(summary_grouped,".\\run_analysis5.txt",row.names=FALSE)
